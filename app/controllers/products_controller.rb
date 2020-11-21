@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    @products = Product.where("lower(name) LIKE '#{params[:q].downcase}%'")  if params[:q]
+    
+    @products = @products.paginate page:params[:page], per_page: 10
+
   end
 
   # GET /products/1
@@ -69,6 +73,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :code, :stock, :praice)
+      params.require(:product).permit(:name, :code, :stock, :price)
     end
 end

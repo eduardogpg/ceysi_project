@@ -9,9 +9,18 @@
         <div class="col-6 text-right">
             <%= link_to 'Nuevo producto', new_product_path, class:'btn btn-info' %>
         </div>
-
+      </div>
+      
+      <br>
+      <div class="row">
+        <div class="col">
+          <form action="<%= products_path %>">
+            <input type="text" class="form-control" placeholder="Buscar producto" name="q">
+          </form>
+        </div>
       </div>
 
+      <br>
       <div class="row mt-2">
         <div class="col">
 
@@ -29,18 +38,29 @@
               <tbody>
                   <% @products.each do |product| %>
                     <tr>
+                    <td><%= product.id %></td>
                       <td><%= product.name %></td>
                       <td><%= product.code %></td>
                       <td><%= product.stock %></td>
-                      <td><%= product.praice %></td>
-                      <td><%= link_to 'Show', product, class:'btn btn-info' %></td>
-                      <td><%= link_to 'Edit', edit_product_path(product), class:'btn btn-warning' %></td>
-                      <td><%= link_to 'Destroy', product, method: :delete, class:'btn btn-delete', data: { confirm: 'Are you sure?' } %></td>
+                      <td><%= product.price %></td>
+                      <td>
+                        <%= link_to 'Ver', product, class:'btn btn-info' %>
+                        <%= link_to 'Editar', edit_product_path(product), class:'btn btn-warning' %>
+                        <%= link_to 'Eliminar', product, method: :delete, class:'btn btn-danger', data: { confirm: 'Realmente desea eliminar el producto?' } %>
+                      </td>
                     </tr>
                   <% end %>
               </tbody>
             </table>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col">
+          <%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+
+        </div>
+      </div>
+
   </div>
 </div>
