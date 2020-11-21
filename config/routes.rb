@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :products
   get '', to: 'main#home'
 
   get 'login', to: 'sessions#new'

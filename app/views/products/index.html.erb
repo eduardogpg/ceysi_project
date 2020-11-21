@@ -1,0 +1,46 @@
+<div class="row mt-2">
+  <div class="col">
+
+      <div class="row">
+        <div class="col-6">
+            <h2>Listado de productos</h2>
+        </div>
+
+        <div class="col-6 text-right">
+            <%= link_to 'Nuevo producto', new_product_path, class:'btn btn-info' %>
+        </div>
+
+      </div>
+
+      <div class="row mt-2">
+        <div class="col">
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% @products.each do |product| %>
+                    <tr>
+                      <td><%= product.name %></td>
+                      <td><%= product.code %></td>
+                      <td><%= product.stock %></td>
+                      <td><%= product.praice %></td>
+                      <td><%= link_to 'Show', product, class:'btn btn-info' %></td>
+                      <td><%= link_to 'Edit', edit_product_path(product), class:'btn btn-warning' %></td>
+                      <td><%= link_to 'Destroy', product, method: :delete, class:'btn btn-delete', data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                  <% end %>
+              </tbody>
+            </table>
+        </div>
+      </div>
+  </div>
+</div>
