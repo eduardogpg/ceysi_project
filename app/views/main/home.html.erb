@@ -1,0 +1,6 @@
+<div class="row mt-4">
+    <div class="col">
+        <h3>Welcome <%= current_user.username %></h3>
+        <%= link_to 'Cerrar sesión', logout_path, method: :delete %>
+    </div>    
+</div>
