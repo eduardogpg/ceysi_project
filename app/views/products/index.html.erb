@@ -15,7 +15,14 @@
       <div class="row">
         <div class="col">
           <form action="<%= products_path %>">
-            <input type="text" class="form-control" placeholder="Buscar producto" name="q">
+
+            <div class="input-group md-form form-sm form-2 pl-0">
+              <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="q">
+              <div class="input-group-append">
+                <span class="input-group-text red"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+              </div>
+            </div>
+
           </form>
         </div>
       </div>

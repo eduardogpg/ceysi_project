@@ -5,17 +5,60 @@
 </div>
 
 <div class="row mt-2">
+  <div class="col-3">
+    <%= image_tag 'product.jpg' %>
+  </div>
+
   <div class="col">
-    <div class="card">
-      <div class="card-header">
-        <%= @product.name %>
-      </div>
-      <div class="card-body">
-        <h5 class="card-title"><% @product.code %></h5>
-        <p class="card-text">Cantidad: <strong><%= @product.stock %></strong></p>
-        <%= link_to 'Editar', edit_product_path(@product), class: "btn btn-warning" %>
-      </div>
+    <div class="h2">
+      <%= @product.name %>
+    </div>
+    <div class="h5 font-weight-bold">
+      Precio: $<span class="text-danger"><%= @product.price %></span>
+    </div>
+     <div class="">
+      <p>
+        <%= @product.description %>
+      </p>
+    </div>
+    <div>
+    
+    </div>
+      <form action="#" method="post">
+          <input type="hidden" name="product_id" value="<%= @product.id %>">
+          
+          <div class="">
+            <button type="button" class="btn btn-info d-inline" id="remove">-</button>
+            <input type="number" value="1" class="form-control col-sm-1 d-inline" id="quantity" name="quantity" readonly>
+            <button type="button" class="btn btn-info" id="add">+</button>
+          </div>
+
+          <div class="mt-2">
+            <button type="submit" class="btn btn-warning">Agregar al carrito</button>
+          </div>
+      </form>
     </div>
 
   </div>
 </div>
+
+<script>
+
+  const add = document.getElementById('add')
+  const remove = document.getElementById('remove')
+  const quantity = document.getElementById('quantity')
+
+  add.addEventListener('click', function(){
+    quantity.value = parseInt(quantity.value) + 1
+  })
+
+  remove.addEventListener('click', function(){
+    value = parseInt(quantity.value)
+
+    if(value != 1){
+      value = value - 1
+    }
+    quantity.value = value
+  })
+
+</script>
