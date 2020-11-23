@@ -1,6 +1,7 @@
 class ShoppingcartsController < ApplicationController
-  before_action :authorized, only: [:add, :show]
+  before_action :authorized, only: [:add, :show, :complete, :destroy]
   before_action :get_or_create_shopping_cart
+  before_action :set_product, only: [:add, :destroy]
 
   skip_before_action :verify_authenticity_token  
 
@@ -12,26 +13,41 @@ class ShoppingcartsController < ApplicationController
 
   end
 
+  def complete
+    @shopping_cart.completed!
+    redirect_to shopping_cart_path
+  end
+  
   def add
-    @product = Product.find params[:product_id]
-
     @shopping_cart_product = ShoppingCartProduct.find_or_create_by(product:@product, shopping_cart:@shopping_cart) do |p|
       p.quantity = params[:quantity]
     end
 
+    @shopping_cart.calculate_total
     redirect_to shopping_cart_path
   end
 
-  def get_or_create_shopping_cart
-    
-    if session[:shopping_cart_id]
-      @shopping_cart = ShoppingCart.find session[:shopping_cart_id]
-    else
-      @shopping_cart = ShoppingCart.create user:current_user
-      session[:shopping_cart_id] = @shopping_cart.id
-    end
+  def destroy
+    @shopping_cart_product = ShoppingCartProduct.find_or_create_by(product:@product, shopping_cart:@shopping_cart)
+    @shopping_cart_product.delete
 
+    @shopping_cart.calculate_total
+    redirect_to shopping_cart_path
   end
 
+  private
+    def get_or_create_shopping_cart
+      @shopping_cart = ShoppingCart.where(id: session[:shopping_cart_id], status:'IN_PROGRESS').first
+
+      unless @shopping_cart
+        @shopping_cart = ShoppingCart.create user:current_user
+        session[:shopping_cart_id] = @shopping_cart.id 
+      end
+
+    end
+
+    def set_product
+      @product = Product.find params[:product_id]
+    end
 
 end
