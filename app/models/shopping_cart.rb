@@ -18,6 +18,12 @@ class ShoppingCart < ApplicationRecord
     self.shopping_cart_product.each { |s_p| self.total += s_p.product.price * s_p.quantity }
 
     self.save
+  end
+
+  def products
+    total = 0
+    self.shopping_cart_product.each { |s_p| total += s_p.quantity }
     
+    total
   end
 end

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   post 'shoppingcarts/destroy', as: 'shopping_cart_destroy'
   post 'shoppingcarts/complete', as: 'shopping_cart_complete'
   
+  resources :shoppingcarts do
+    get :completed, on: :member
+  end
+
   resources :products
   get '', to: 'main#home'
 
