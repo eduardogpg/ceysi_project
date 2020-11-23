@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'shoppingcarts/create'
+  get 'shoppingcarts/show', as: 'shopping_cart'
+  post 'shoppingcarts/add'
+
   resources :products
   get '', to: 'main#home'
 
@@ -10,5 +14,5 @@ Rails.application.routes.draw do
   get 'welcome', to: 'sessions#welcome'
     
   resources :users, only: [:new, :create]
-
+  
 end

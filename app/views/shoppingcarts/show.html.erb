@@ -1,0 +1,55 @@
+<style>
+.borderless td, .borderless th {
+    border: none;
+}
+</style>
+
+<div class="row">
+    <div class="col-8">
+        <%= link_to 'Seguir comprando', products_path %>
+        <table class='table borderless'>
+            <thead>
+                <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% @shopping_cart.shopping_cart_product.each do |product| %>
+                    <tr>
+                        <th scope="row"><%= product.product.name %></th>
+                        <td><%= product.quantity %></td>
+                        <td><%= product.product.price %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <div class="card-body"> 
+                <h5>Resumen del pedido</h5>
+                <table class='table table-borderless'>
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total</td>
+                            <td>$<%= @shopping_cart.total %></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-warning">
+                    Pagar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

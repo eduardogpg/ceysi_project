@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_22_234912) do
+ActiveRecord::Schema.define(version: 2020_11_23_011522) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -22,6 +22,24 @@ ActiveRecord::Schema.define(version: 2020_11_22_234912) do
     t.text "description"
   end
 
+  create_table "shopping_cart_products", force: :cascade do |t|
+    t.integer "shopping_cart_id"
+    t.integer "product_id"
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_shopping_cart_products_on_product_id"
+    t.index ["shopping_cart_id"], name: "index_shopping_cart_products_on_shopping_cart_id"
+  end
+
+  create_table "shopping_carts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "total", default: "0.0"
+    t.index ["user_id"], name: "index_shopping_carts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -30,4 +48,5 @@ ActiveRecord::Schema.define(version: 2020_11_22_234912) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "shopping_carts", "users"
 end
