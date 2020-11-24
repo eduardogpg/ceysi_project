@@ -27,6 +27,8 @@
 /storage/*
 !/storage/.keep
 
+config/application.yml
+
 /public/assets
 .byebug_history
 
