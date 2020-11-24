@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_11_24_020605) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 2020_11_24_020605) do
   end
 
   create_table "shopping_cart_products", force: :cascade do |t|
-    t.integer "shopping_cart_id"
-    t.integer "product_id"
+    t.bigint "shopping_cart_id"
+    t.bigint "product_id"
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -33,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_11_24_020605) do
   end
 
   create_table "shopping_carts", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "total", default: "0.0"
