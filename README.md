@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Es necesario crear el archivo aplication.yml en el folder config.
 
-Things you may want to cover:
+gmail_username: ''
+gmail_password: ''
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Y añadir las credenciales Gmail para el envío de correo!
