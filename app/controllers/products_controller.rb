@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :authorized, only: [:update]
 
   # GET /products
   # GET /products.json
@@ -46,6 +47,9 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
+
+        ProductMailer.stock(current_user, @product).deliver if @product.stock <= 5
+
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else

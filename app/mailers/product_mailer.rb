@@ -3,6 +3,12 @@ class ProductMailer < ApplicationMailer
 
     def stock(user, product)
         @user = user
+
+        puts "\n\n\n"
+        puts "El correo del usuario es:"
+        puts user.email
+        puts "\n\n\n"
+
         @product = product
         mail(to: @user.email, subject: 'Producto bajo de inventario')
     end
